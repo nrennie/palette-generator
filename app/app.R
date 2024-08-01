@@ -10,7 +10,7 @@ library(shinythemes)
 random_hex <- function(n) {
   generate_hex <- function() {
     choices <- sample(c(as.character(0:9), LETTERS[1:6]),
-                      size = 6, replace = TRUE
+      size = 6, replace = TRUE
     )
     output <- paste0("#", paste0(choices, collapse = ""))
     return(output)
@@ -20,17 +20,20 @@ random_hex <- function(n) {
 }
 
 plot_hex <- function(hex) {
-  plot_df <- data.frame(hex = hex)
+  plot_df <- data.frame(
+    hex = hex,
+    y = rev(seq_along(hex)))
   g <- ggplot(
     data = plot_df,
     mapping = aes(
       x = "1",
-      y = hex, 
+      y = y,
       fill = hex,
-      label = hex)
+      label = hex
+    )
   ) +
     geom_raster() +
-    geom_text() +
+    geom_label(fill = "white") +
     scale_fill_identity() +
     coord_cartesian(expand = FALSE) +
     theme_void()
@@ -44,16 +47,24 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       hr(),
+      # Select number of colours
       selectInput(
         inputId = "n_colours",
         label = "Number of colors:",
         choices = 1:12,
         selected = 6
       ),
+      # Regenerate palette
+      actionButton(
+        inputId = "generate",
+        label = "Regenerate palette"
+      ),
       width = 6
     ),
     mainPanel(
       plotOutput("plot_palette"),
+      br(),
+      verbatimTextOutput("r_palette"),
       br(),
       width = 6
     )
@@ -63,15 +74,29 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   # Generate palette
-  palette <- reactive({
-    random_hex(n = input$n_colours)
-  })
-
+  palette <- eventReactive(
+    c(input$n_colours, input$generate),
+    {
+      random_hex(n = input$n_colours)
+    }
+  )
+  
   # Plot palette
   output$plot_palette <- renderPlot({
     plot_hex(palette())
   })
-
+  
+  # Vector of palettes in R
+  output$r_palette <- renderPrint({
+    cat(paste0(
+      "c(",
+      paste0(
+        paste0("'", palette(), "'"),
+        collapse = ", "
+      ), ")"
+    ))
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)
