@@ -82,8 +82,9 @@ ui <- fluidPage(
       verbatimTextOutput("py_palette"),
       br(),
       width = 6
-    )
-  )
+    ),
+  ),
+  fluidRow(column(12, align="center", htmlOutput("footer")))
 )
 
 
@@ -148,6 +149,14 @@ server <- function(input, output) {
       ), "]"
     ))
   })
+  
+  # Footer
+  output$footer <- renderText({
+    "<footer style='position: fixed; left: 0; bottom: 0; width: 100%; text-align: center; padding-bottom: 10px;'> 
+      © Nicola Rennie. 2024.
+    </footer>"
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)
