@@ -102,7 +102,13 @@ server <- function(input, output) {
   palette <- eventReactive(
     c(input$n_colours, input$generate),
     {
-      c(input$keep_colours, random_hex(n = num_generate()))
+      if (num_generate() < 0) {
+        input$keep_colours[1:input$n_colours]
+      } else if (num_generate() == 0) {
+        input$keep_colours
+      } else {
+        c(input$keep_colours, random_hex(n = num_generate()))
+      }
     }
   )
 
