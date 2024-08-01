@@ -64,7 +64,10 @@ ui <- fluidPage(
     mainPanel(
       plotOutput("plot_palette"),
       br(),
+      markdown("Use this palette in R:"),
       verbatimTextOutput("r_palette"),
+      markdown("Use this palette in Python:"),
+      verbatimTextOutput("py_palette"),
       br(),
       width = 6
     )
@@ -94,6 +97,17 @@ server <- function(input, output) {
         paste0("'", palette(), "'"),
         collapse = ", "
       ), ")"
+    ))
+  })
+  
+  # Vector of palettes in Python
+  output$py_palette <- renderPrint({
+    cat(paste0(
+      "[",
+      paste0(
+        paste0("'", palette(), "'"),
+        collapse = ", "
+      ), "]"
     ))
   })
   
