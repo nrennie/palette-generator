@@ -1,15 +1,7 @@
-# Palette Generator
+# Palette Generator App
 
-An app to generate a random color palette.
+This repository contains the source code for an app to generate a random color palette. The app is built using {shiny} in R, and is hosted via GitHub Pages using `shinylive`.
 
-## Upcoming features
-
-- [x] Select number of colors
-- [x] Regenerate new palette button
-- [x] Check boxes to keep colors
-- [x] Text that prints palette as vector
-- [x] Use base R for plotting
-- [ ] Text with explanation
-- [ ] View colorblind friendliness
-- [ ] Order of palettes should be persistent
-- [ ] Better placement of checkboxes
+<p align="center">
+<img src="app.png" width = "90%" alt="Screenshot of shiny app showing palette with 6 colours">
+</p>
