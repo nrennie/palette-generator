@@ -6,9 +6,10 @@ An app to generate a random color palette.
 
 - [x] Select number of colors
 - [x] Regenerate new palette button
-- [ ] Text with explanation
-- [ ] Unlimited number of colors
-- [ ] View colorblind friendliness
-- [ ] Check boxes to keep colors
+- [x] Check boxes to keep colors
 - [x] Text that prints palette as vector
-- [ ] Use base R for plotting
+- [x] Use base R for plotting
+- [ ] Text with explanation
+- [ ] View colorblind friendliness
+- [ ] Order of palettes should be persistent
+- [ ] Better placement of checkboxes

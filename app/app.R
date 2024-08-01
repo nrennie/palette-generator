@@ -1,8 +1,6 @@
 library(shiny)
 library(htmltools)
-library(ggplot2)
 library(shinythemes)
-
 
 # Functions ---------------------------------------------------------------
 
@@ -19,28 +17,40 @@ random_hex <- function(n) {
   return(hex)
 }
 
-plot_hex <- function(hex) {
-  plot_df <- data.frame(
-    hex = hex,
-    y = rev(seq_along(hex)))
-  g <- ggplot(
-    data = plot_df,
-    mapping = aes(
-      x = "1",
-      y = y,
-      fill = hex,
-      label = hex
-    )
-  ) +
-    geom_raster() +
-    geom_label(fill = "white") +
-    scale_fill_identity() +
-    coord_cartesian(expand = FALSE) +
-    theme_void()
-  return(g)
+plot_hex <- function(hex, pad = 0.1) {
+  n <- length(hex)
+  old <- graphics::par(mar = c(0, 0, 0, 0))
+  on.exit(graphics::par(old))
+  # label colours
+  lum_from_rgb <- function(rgb) {
+    sum(c(0.2126, 0.7152, 0.0722)*rgb)
+  }
+  light_or_dark <- function(hex) {
+    rgb <- as.data.frame(col2rgb(hex))
+    lum <- apply(rgb, 2, lum_from_rgb)
+    c("white", "black")[(lum > 128)+1]
+  }
+  # plot colours
+  graphics::image(
+    x = 1,
+    y = 1:n,
+    z = matrix(1:n, nrow = 1),
+    col = rev(hex),
+    ylab = "", xaxt = "n", yaxt = "n", bty = "n"
+  )
+  # add labels
+  graphics::text(
+    x = 1,
+    y = 1:n,
+    cex = 1.5,
+    labels = rev(hex),
+    col = light_or_dark(rev(hex))
+  )
 }
 
-# Define UI for app that draws a histogram ----
+
+# UI ----------------------------------------------------------------------
+
 ui <- fluidPage(
   theme = shinytheme("darkly"),
   titlePanel("Palette Generator"),
@@ -54,6 +64,8 @@ ui <- fluidPage(
         choices = 1:12,
         selected = 6
       ),
+      # Keep some colours
+      uiOutput("keep_check"),
       # Regenerate palette
       actionButton(
         inputId = "generate",
@@ -74,21 +86,41 @@ ui <- fluidPage(
   )
 )
 
+
+# Server ------------------------------------------------------------------
+
 server <- function(input, output) {
-  
+  # Generate palette
+  num_generate <- eventReactive(
+    c(input$n_colours, input$keep_colours, input$generate),
+    {
+      num_cols <- as.numeric(input$n_colours) - length(input$keep_colours)
+    }
+  )
+
   # Generate palette
   palette <- eventReactive(
     c(input$n_colours, input$generate),
     {
-      random_hex(n = input$n_colours)
+      c(input$keep_colours, random_hex(n = num_generate()))
     }
   )
-  
+
+  # Colours to keep
+  output$keep_check <- renderUI({
+    checkboxGroupInput(
+      inputId = "keep_colours",
+      label = "Colours to keep:",
+      choices = palette(),
+      selected = input$keep_colours
+    )
+  })
+
   # Plot palette
   output$plot_palette <- renderPlot({
     plot_hex(palette())
   })
-  
+
   # Vector of palettes in R
   output$r_palette <- renderPrint({
     cat(paste0(
@@ -99,7 +131,7 @@ server <- function(input, output) {
       ), ")"
     ))
   })
-  
+
   # Vector of palettes in Python
   output$py_palette <- renderPrint({
     cat(paste0(
@@ -110,7 +142,6 @@ server <- function(input, output) {
       ), "]"
     ))
   })
-  
 }
 
 shinyApp(ui = ui, server = server)
