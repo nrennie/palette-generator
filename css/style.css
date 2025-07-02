@@ -74,7 +74,9 @@ main {
 
 div.resize {
   max-width: 550px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
 }
 
 .controls {
@@ -88,8 +90,7 @@ div.resize {
 }
 
 .palette-display {
-  margin: 10px;
-  max-width: 100%;
+  width: 550px;
 }
 
 .control-group {
@@ -145,27 +146,6 @@ button:hover {
   border: 1px solid #666;
 }
 
-.code-block {
-  background-color: #213131;
-  padding: 15px;
-  font-family: monospace;
-  font-size: 14px;
-  color: #ffffff;
-  overflow-x: auto;
-  max-width: 100%;
-  scrollbar-width: thin;
-  scrollbar-color: #508080 #f1f1f1;
-}
-
-pre {
-  margin-top: -20px !important;
-  margin-bottom: -20px !important;
-  padding: 0 !important;
-  border: none;
-  background: none;
-  line-height: normal;
-}
-
 .code-block::-webkit-scrollbar {
   height: 8px;
 }
@@ -181,4 +161,54 @@ pre {
 
 .code-block::-webkit-scrollbar-thumb:hover {
   background: #508080;
+}
+
+.code-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  width: 525px;
+}
+
+.code-block {
+  background-color: #213131;
+  padding: 15px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #ffffff;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #508080 #f1f1f1;
+}
+
+.copy-btn svg {
+  display: block;
+  pointer-events: none;
+}
+
+.copy-btn {
+  all: unset;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.copy-btn:hover {
+  all: unset;
+  color: #e30b5c;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.copy-btn svg {
+  display: block;
+  pointer-events: none;
 }

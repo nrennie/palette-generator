@@ -50,17 +50,48 @@
             </div>
 
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 ">
                 <div class="code-section">
                   <p>Use this palette in JavaScript or Python:</p>
-                  <pre>
-                  <div id="pythonCode" class="code-block"></div>
-                  </pre>
+                  
+                  <div class="code-wrapper">
+                    <pre id="pythonCode" class="code-block"></pre>
+                  <button class="copy-btn" aria-label="Copy code">
+                    <!-- SVG copy icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M10 1H2a1 1 0 0 0-1 1v10h1V2h8V1z" />
+                      <path
+                        d="M14 3H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM6 4h8v10H6V4z"
+                      />
+                    </svg>
+                  </button>
+                  </div>
 
                   <p>Use this palette in R:</p>
-                  <pre>
-                  <div id="rCode" class="code-block"></div>
-                  </pre>
+                  <div class="code-wrapper">
+                  <pre id="rCode" class="code-block"></pre>
+                  <button class="copy-btn" aria-label="Copy code">
+                    <!-- SVG copy icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M10 1H2a1 1 0 0 0-1 1v10h1V2h8V1z" />
+                      <path
+                        d="M14 3H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM6 4h8v10H6V4z"
+                      />
+                    </svg>
+                  </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -68,7 +99,7 @@
         </div>
 
         <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div class="palette-display">
+          <div class="palette-display resize">
             <div id="paletteContainer"></div>
           </div>
         </div>
