@@ -195,7 +195,7 @@ class PaletteGenerator {
 
     // R code
     const rCode = `c(${this.palette
-      .map((colour) => `'${colour}'`)
+      .map((colour) => `"${colour}"`)
       .join(", ")})`;
     d3.select("#rCode").text(rCode);
 
@@ -230,5 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch((err) => console.error("Failed to copy:", err));
     });
+  });
+});
+
+window.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("randomPaletteBtn").addEventListener("click", function () {
+    paletteReport(palette);
   });
 });

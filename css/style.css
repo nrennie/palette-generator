@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Commissioner&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
 
 h1,
 h2,
@@ -7,32 +7,69 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Fraunces", Times New Roman, serif;
+  font-family: "Oswald", Arial, sans-serif;
   font-weight: bold;
 }
 
-* {
-  font-family: "Commissioner", Arial, sans-serif;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Nunito", Arial, sans-serif;
 }
 
 a {
-  color: #508080;
+  color: #7F055F;
 }
 
 a:hover {
-  color: #e30b5c;
+  color: #B00783;
+}
+
+nav {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.freeText {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+nav a {
+  background-color: #FFFFFF;
+  color: #7F055F;
+  padding: 5px 5px 0px 5px;
+  margin: auto;
+  margin-bottom: 10px !important;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px !important;
+  border-color: #7F055F !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  display: block !important;
+  width: 200px !important;
+}
+
+nav a:hover {
+  color: #B00783;
+  background-color: #E4E9F1;
+  border-color: #B00783;
 }
 
 html,
 body {
   height: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 body {
-  background-color: #f0f5f5;
-  color: #2f4f4f;
+  background-color: #F2F4F8;
+  color: #151C28;
 }
 
 main {
@@ -57,7 +94,7 @@ main {
 .page-wrap {
   min-height: 100%;
   margin-bottom: -40px;
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 .page-wrap:after {
@@ -73,28 +110,76 @@ main {
 }
 
 div.resize {
-  max-width: 550px;
+  max-width: 525px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
 }
 
+#inputHex {
+  height: 36px;
+  width: 100%;
+  margin-bottom: -10px;
+  padding-bottom: 0px;
+}
+
+.warning {
+  background: #fff4e5;
+  border: 1px solid #ffcc80;
+  color: #7a4b00;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  width: 100%;
+}
+
+#hexPreview {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+div.resizeLeft {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .controls {
-  padding: 20px;
-  margin: 10px;
-  margin-bottom: 20px;
-  background-color: #c2d6d6;
+  padding: 15px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #E4E9F1;
+  border-style: solid;
+  border-color: #F2F4F8;
+  border-width: 5px;
   height: fit-content;
-  width: 525px;
+  width: 100%;
+  max-width: 800px;
+}
+
+#alphaSlider {
+  margin: auto;
+  width: 300px;
   max-width: 100%;
 }
 
 .palette-display {
-  width: 550px;
+  width: 100%;
+  max-width: 550px;
 }
 
 .control-group {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  width: 100%;
+  max-width: 800px;
 }
 
 select,
@@ -104,15 +189,16 @@ button {
   border: 1px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #fff;
 }
 
 select:focus,
 button:focus {
-  outline: 2px solid #508080;
+  outline: 2px solid #7F055F;
 }
 
 button {
-  background-color: #508080;
+  background-color: #7F055F;
   color: #fff;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -120,7 +206,7 @@ button {
 }
 
 button:hover {
-  background-color: #e30b5c;
+  background-color: #B00783;
 }
 
 .keep-colors {
@@ -155,35 +241,39 @@ button:hover {
 }
 
 .code-block::-webkit-scrollbar-thumb {
-  background: #508080;
+  background: #7F055F;
   border-radius: 4px;
 }
 
 .code-block::-webkit-scrollbar-thumb:hover {
-  background: #508080;
+  background: #7F055F;
 }
 
 .code-wrapper {
   position: relative;
   display: inline-block;
-  max-width: 100%;
-  width: 525px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navRow {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
 }
 
 .code-block {
   background-color: #213131;
   padding: 15px;
+  padding-top: 30px;
   font-family: monospace;
   font-size: 14px;
   color: #ffffff;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #508080 #f1f1f1;
-}
-
-.copy-btn svg {
-  display: block;
-  pointer-events: none;
+  scrollbar-color: #7F055F #f1f1f1;
 }
 
 .copy-btn {
@@ -199,7 +289,7 @@ button:hover {
 
 .copy-btn:hover {
   all: unset;
-  color: #e30b5c;
+  color: #B00783;
   position: absolute;
   top: 8px;
   right: 8px;

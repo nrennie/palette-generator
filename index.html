@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,8 +11,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/script.js"></script>
 
     <title>Palette Generator</title>
   </head>
@@ -20,92 +18,24 @@
     <div class="page-wrap">
       <div class="container-fluid text-center">
         <h1 class="title">Palette Generator</h1>
-      </div>
-
-      <div class="row">
-        <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div class="controls">
-            <div class="row">
-              <div class="col-12">
-                <div class="control-group">
-                  <label for="colourCount">Number of colours:</label>
-                  <select id="colourCount"></select>
-                </div>
-              </div>
+        <h2 class="subtitle">Create beautiful colour palettes</h2>
+        <p>Generate custom colour palettes for your projects.</p>
+        
+      <div class="navRow justify-content-center">
+          <nav class="row">
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+              <a href="random.html">Random</a>
             </div>
-
-            <div class="row">
-              <div class="col-12">
-                <div class="keep-colours row">
-                  <label>Colours to keep:</label>
-                  <div id="keepColoursContainer"></div>
-                </div>
-              </div>
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+              <a href="explore.html">Explore</a>
             </div>
-
-            <div class="row">
-              <div class="col-12">
-                <button id="generateBtn">Regenerate palette</button>
-              </div>
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+              <a href="blend.html">Blend</a>
             </div>
-
-            <div class="row">
-              <div class="col-12 ">
-                <div class="code-section">
-                  <p>Use this palette in JavaScript or Python:</p>
-                  
-                  <div class="code-wrapper">
-                    <pre id="pythonCode" class="code-block"></pre>
-                  <button class="copy-btn" aria-label="Copy code">
-                    <!-- SVG copy icon -->
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M10 1H2a1 1 0 0 0-1 1v10h1V2h8V1z" />
-                      <path
-                        d="M14 3H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM6 4h8v10H6V4z"
-                      />
-                    </svg>
-                  </button>
-                  </div>
-
-                  <p>Use this palette in R:</p>
-                  <div class="code-wrapper">
-                  <pre id="rCode" class="code-block"></pre>
-                  <button class="copy-btn" aria-label="Copy code">
-                    <!-- SVG copy icon -->
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M10 1H2a1 1 0 0 0-1 1v10h1V2h8V1z" />
-                      <path
-                        d="M14 3H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM6 4h8v10H6V4z"
-                      />
-                    </svg>
-                  </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div class="palette-display resize">
-            <div id="paletteContainer"></div>
-          </div>
+          </nav>
         </div>
       </div>
-    </div>
-
+    
     <div class="container-fluid text-center">
       <footer class="site-footer">
         <ul class="list-unstyled">

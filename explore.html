@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/palettes/PrettyCols.js"></script>
+    <script src="js/palettes/ColorBrewer.js"></script>
+    <script src="js/palettes/Pride.js"></script>
+    <script src="js/palettes/PaulTol.js"></script>
+    <script src="js/palettes/CARTOColors.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/explore.js"></script>
+
+    <title>Palette Generator</title>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <div class="container-fluid text-center">
+        <h1 class="title">Palette Generator</h1>
+        <h2 class="subtitle">Explore</h2>
+        <p>Explore existing colour palettes.</p>
+
+        <div class="navRow justify-content-center">
+          <nav class="row">
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+              <a href="random.html">Random</a>
+            </div>
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+              <a href="explore.html">Explore</a>
+            </div>
+            <div class="col-4 col-md-4 d-flex justify-content-center">
+              <a href="blend.html">Blend</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="controls">
+            <div class="row">
+              <div class="col-12">
+                <div class="control-group">
+                  <label for="file-dropdown-container"
+                    >Select a palette collection:</label
+                  >
+                  <div id="file-dropdown-container"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="control-group">
+                  <label for="palette-dropdown-container"
+                    >Select a palette:</label
+                  >
+                  <div id="palette-dropdown-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center text-center">
+          <div id="plot"></div>
+        </div>
+        <div class="col-12">
+          <div class="resizeLeft">
+            <p class="freeText">In greyscale this palette appears as:</p>
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center text-center">
+          <div id="plotBW"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="controls">
+            <div class="row">
+              <div class="col-12">
+                <div class="code-section">
+                  <p>Use this palette in JavaScript or Python:</p>
+
+                  <div class="code-wrapper">
+                    <pre id="pythonCode" class="code-block"></pre>
+                    <button class="copy-btn" aria-label="Copy code">
+                      <!-- SVG copy icon -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M10 1H2a1 1 0 0 0-1 1v10h1V2h8V1z" />
+                        <path
+                          d="M14 3H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM6 4h8v10H6V4z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <p>Use this palette in R:</p>
+                  <div class="code-wrapper">
+                    <pre id="rCode" class="code-block"></pre>
+                    <button class="copy-btn" aria-label="Copy code">
+                      <!-- SVG copy icon -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M10 1H2a1 1 0 0 0-1 1v10h1V2h8V1z" />
+                        <path
+                          d="M14 3H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM6 4h8v10H6V4z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div id="paletteReport"></div>
+                <button id="paletteBtn">View palette report</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid text-center">
+      <footer class="site-footer">
+        <ul class="list-unstyled">
+          <li>
+            Designed by
+            <a href="https://nrennie.rbind.io/" target="_blank">Nicola Rennie</a
+            >.<br />
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
