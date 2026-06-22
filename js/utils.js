@@ -1,32 +1,32 @@
 function rgbToGreyscale(hex) {
-    const rgb = d3.color(hex).rgb()
-    const red = rgb['r'] * 0.30
-    const green = rgb['g'] * 0.59
-    const blue = rgb['b'] * 0.11
-    const grey = [red + green + blue, red + green + blue, red + green + blue]
-    const greyHex = d3.rgb(...grey).formatHex();
-    return greyHex
+  const rgb = d3.color(hex).rgb()
+  const red = rgb['r'] * 0.30
+  const green = rgb['g'] * 0.59
+  const blue = rgb['b'] * 0.11
+  const grey = [red + green + blue, red + green + blue, red + green + blue]
+  const greyHex = d3.rgb(...grey).formatHex();
+  return greyHex
 }
 
 function hexToRgb(hex) {
-    hex = hex.replace('#', '');
+  hex = hex.replace('#', '');
 
-    if (hex.length === 3) {
-        hex = hex.split('').map(c => c + c).join('');
-    }
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
 
-    const num = parseInt(hex, 16);
+  const num = parseInt(hex, 16);
 
-    return {
-        r: (num >> 16) & 255,
-        g: (num >> 8) & 255,
-        b: num & 255
-    };
+  return {
+    r: (num >> 16) & 255,
+    g: (num >> 8) & 255,
+    b: num & 255
+  };
 }
 
 function rgbToHex(r, g, b) {
-    const toHex = (v) => v.toString(16).padStart(2, '0');
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  const toHex = (v) => v.toString(16).padStart(2, '0');
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
 function isValidHex(hex) {
@@ -34,30 +34,30 @@ function isValidHex(hex) {
 }
 
 function toGreyscale(hexArray) {
-    return hexArray.map(rgbToGreyscale)
+  return hexArray.map(rgbToGreyscale)
 }
 
 function paletteReport(palette) {
 
-    const url = 'https://projects.susielu.com/viz-palette?colors=' + encodeURIComponent(JSON.stringify(palette));
-    window.open(url, '_blank');
+  const url = 'https://projects.susielu.com/viz-palette?colors=' + encodeURIComponent(JSON.stringify(palette));
+  window.open(url, '_blank');
 }
 
 function randomHex() {
-    const choices = "0123456789ABCDEF";
-    let result = "#";
-    for (let i = 0; i < 6; i++) {
-        result += choices[Math.floor(Math.random() * choices.length)];
-    }
-    return result;
+  const choices = "0123456789ABCDEF";
+  let result = "#";
+  for (let i = 0; i < 6; i++) {
+    result += choices[Math.floor(Math.random() * choices.length)];
+  }
+  return result;
 }
 
 function generateRandomColours(count) {
-    const colours = [];
-    for (let i = 0; i < count; i++) {
-        colours.push(this.randomHex());
-    }
-    return colours;
+  const colours = [];
+  for (let i = 0; i < count; i++) {
+    colours.push(this.randomHex());
+  }
+  return colours;
 }
 
 

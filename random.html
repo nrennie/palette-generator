@@ -43,7 +43,7 @@
       </div>
 
       <div class="row">
-        <div class="col-12 col-md-6 d-flex justify-content-center">
+        <div class="col-12 d-flex justify-content-center">
           <div class="controls">
             <div class="row">
               <div class="col-12">
@@ -68,7 +68,32 @@
                 <button id="generateBtn">Regenerate palette</button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-12">
+          <div class="resizeLeft">
+            <p class="freeText">Random palette:</p>
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center text-center">
+          <div id="paletteContainer"></div>
+        </div>
+        <div class="col-12">
+          <div class="resizeLeft">
+            <p class="freeText">In greyscale this palette appears as:</p>
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center text-center">
+          <div id="plotBW"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="controls">
             <div class="row">
               <div class="col-12">
                 <div class="code-section">
@@ -119,15 +144,9 @@
             <div class="row">
               <div class="col-12">
                 <div id="paletteReport"></div>
-                <button id="randomPaletteBtn">View palette report</button>
+                <button id="paletteBtn">View palette report</button>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6 d-flex justify-content-center">
-          <div class="palette-display resize">
-            <div id="paletteContainer"></div>
           </div>
         </div>
       </div>

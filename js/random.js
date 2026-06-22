@@ -1,3 +1,5 @@
+let paletteGenerator;
+
 class PaletteGenerator {
   constructor() {
     this.palette = [];
@@ -48,19 +50,10 @@ class PaletteGenerator {
     });
   }
 
-  randomHex() {
-    const choices = "0123456789ABCDEF";
-    let result = "#";
-    for (let i = 0; i < 6; i++) {
-      result += choices[Math.floor(Math.random() * choices.length)];
-    }
-    return result;
-  }
-
   generateRandomColours(count) {
     const colours = [];
     for (let i = 0; i < count; i++) {
-      colours.push(this.randomHex());
+      colours.push(randomHex());
     }
     return colours;
   }
@@ -86,69 +79,10 @@ class PaletteGenerator {
     this.updateCodeBlocks();
   }
 
-  getLuminance(hex) {
-    // Convert hex to RGB
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-
-    // Calculate luminance
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  }
-
-  getTextColour(backgroundColour) {
-    const luminance = this.getLuminance(backgroundColour);
-    return luminance > 128 ? "#000000" : "#ffffff";
-  }
-
   updateDisplay() {
-    // Clear previous content
-    d3.select("#paletteContainer").selectAll("*").remove();
-
-    const fixedWidth = 100;
-    const blockHeight = 60;
-
-    // Create SVG with fixed dimensions
-    const svg = d3
-      .select("#paletteContainer")
-      .append("svg")
-      .attr("width", "100%")
-      .attr("height", this.palette.length * (blockHeight + 2))
-      .style("display", "block")
-      .style("vertical-align", "top");
-
-    // Create colour blocks
-    const blocks = svg
-      .selectAll("g")
-      .data(this.palette)
-      .enter()
-      .append("g")
-      .attr("transform", (d, i) => `translate(0, ${i * (blockHeight + 2)})`);
-
-    // Add rectangles
-    const containerWidth = d3
-      .select("#paletteContainer")
-      .node()
-      .getBoundingClientRect().width;
-
-    blocks
-      .append("rect")
-      .attr("width", containerWidth)
-      .attr("height", blockHeight)
-      .attr("fill", (d) => d);
-
-    // Add text labels
-    blocks
-      .append("text")
-      .attr("x", containerWidth / 2)
-      .attr("y", blockHeight / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .attr("fill", (d) => this.getTextColour(d))
-      .attr("font-family", "monospace")
-      .attr("font-size", "14px")
-      .attr("font-weight", "bold")
-      .text((d) => d);
+    palettePlot(this.palette, "#paletteContainer");
+    const bwPalette = toGreyscale(this.palette);
+    palettePlot(bwPalette, "#plotBW");
   }
 
   updateKeepColoursCheckboxes() {
@@ -209,7 +143,8 @@ class PaletteGenerator {
 
 // Initialize the palette generator when the page loads
 document.addEventListener("DOMContentLoaded", () => {
-  new PaletteGenerator();
+  paletteGenerator = new PaletteGenerator();
+
   document.querySelectorAll(".copy-btn").forEach((button) => {
     button.addEventListener("click", () => {
       const wrapper = button.closest(".code-wrapper");
@@ -231,10 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => console.error("Failed to copy:", err));
     });
   });
-});
 
-window.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("randomPaletteBtn").addEventListener("click", function () {
-    paletteReport(palette);
+  document.getElementById("paletteBtn").addEventListener("click", () => {
+    paletteReport(paletteGenerator.palette);
   });
 });
