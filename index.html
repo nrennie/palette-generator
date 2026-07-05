@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta property="og:title" content="Palette Generator" />
-    <meta property="og:description" content="Generate and explore colour palettes" />
-    <meta property="og:image" content="https://nrennie.rbind.io/palette-generator/app.png" />
+    <meta
+      property="og:description"
+      content="Generate and explore colour palettes"
+    />
+    <meta
+      property="og:image"
+      content="https://nrennie.rbind.io/palette-generator/app.png"
+    />
     <meta property="og:type" content="website" />
 
     <link
@@ -22,11 +28,11 @@
   <body>
     <div class="page-wrap">
       <div class="container-fluid text-center">
-        <h1 class="title">Palette Generator</h1>
+        <h1 class="title"><a href="index.html">Palette Generator</a></h1>
         <h2 class="subtitle">Create beautiful colour palettes</h2>
         <p>Generate custom colour palettes for your projects.</p>
-        
-      <div class="navRow justify-content-center">
+
+        <div class="navRow justify-content-center">
           <nav class="row">
             <div class="col-6 col-md-3 d-flex justify-content-center">
               <a href="random.html">Random</a>
@@ -43,7 +49,66 @@
           </nav>
         </div>
       </div>
-    
+
+      <div class="row maxWidth">
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <a href="random.html" class="panelTab-link">
+            <div class="panelTab">
+              <h3>Random</h3>
+              <p>Generate a random colour palette.</p>
+              <img
+                src="img/random.png"
+                alt="Random palette icon"
+                class="panelTab-img"
+              />
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <a href="explore.html" class="panelTab-link">
+            <div class="panelTab">
+              <h3>Explore</h3>
+              <p>Explore existing colour palettes.</p>
+              <img
+                src="img/explore.png"
+                alt="Explore palette icon"
+                class="panelTab-img"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="row maxWidth">
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <a href="blend.html" class="panelTab-link">
+            <div class="panelTab">
+              <h3>Blend</h3>
+              <p>Blend an existing palette with another colour.</p>
+              <img
+                src="img/blend.png"
+                alt="Blend palette icon"
+                class="panelTab-img"
+              />
+            </div>
+          </a>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+          <a href="tint.html" class="panelTab-link">
+            <div class="panelTab">
+              <h3>Tint</h3>
+              <p>Explore lighter and darker variations of an existing colour.</p>
+              <img
+                src="img/tint.png"
+                alt="Tint palette icon"
+                class="panelTab-img"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="container-fluid text-center">
       <footer class="site-footer">
         <ul class="list-unstyled">

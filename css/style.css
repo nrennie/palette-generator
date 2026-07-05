@@ -11,6 +11,13 @@ h6 {
   font-weight: bold;
 }
 
+h1 a {
+  font-family: "Oswald", Arial, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000000;
+}
+
 *,
 *::before,
 *::after {
@@ -19,11 +26,11 @@ h6 {
 }
 
 a {
-  color: #7F055F;
+  color: #7f055f;
 }
 
 a:hover {
-  color: #B00783;
+  color: #b00783;
 }
 
 nav {
@@ -39,15 +46,15 @@ nav {
 }
 
 nav a {
-  background-color: #FFFFFF;
-  color: #7F055F;
+  background-color: #ffffff;
+  color: #7f055f;
   padding: 5px 5px 0px 5px;
   margin: auto;
   margin-bottom: 10px !important;
   border-radius: 5px;
   border-style: solid;
   border-width: 2px !important;
-  border-color: #7F055F !important;
+  border-color: #7f055f !important;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
@@ -56,9 +63,9 @@ nav a {
 }
 
 nav a:hover {
-  color: #B00783;
-  background-color: #E4E9F1;
-  border-color: #B00783;
+  color: #b00783;
+  background-color: #e4e9f1;
+  border-color: #b00783;
 }
 
 html,
@@ -68,8 +75,8 @@ body {
 }
 
 body {
-  background-color: #F2F4F8;
-  color: #151C28;
+  background-color: #f2f4f8;
+  color: #151c28;
 }
 
 main {
@@ -156,9 +163,9 @@ div.resizeLeft {
   margin-right: 0px !important;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: #E4E9F1;
+  background-color: #e4e9f1;
   border-style: solid;
-  border-color: #F2F4F8;
+  border-color: #f2f4f8;
   border-width: 5px;
   height: fit-content;
   width: 100%;
@@ -194,11 +201,11 @@ button {
 
 select:focus,
 button:focus {
-  outline: 2px solid #7F055F;
+  outline: 2px solid #7f055f;
 }
 
 button {
-  background-color: #7F055F;
+  background-color: #7f055f;
   color: #fff;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -206,7 +213,7 @@ button {
 }
 
 button:hover {
-  background-color: #B00783;
+  background-color: #b00783;
 }
 
 .keep-colors {
@@ -241,12 +248,12 @@ button:hover {
 }
 
 .code-block::-webkit-scrollbar-thumb {
-  background: #7F055F;
+  background: #7f055f;
   border-radius: 4px;
 }
 
 .code-block::-webkit-scrollbar-thumb:hover {
-  background: #7F055F;
+  background: #7f055f;
 }
 
 .code-wrapper {
@@ -273,7 +280,7 @@ button:hover {
   color: #ffffff;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #7F055F #f1f1f1;
+  scrollbar-color: #7f055f #f1f1f1;
 }
 
 .copy-btn {
@@ -289,7 +296,7 @@ button:hover {
 
 .copy-btn:hover {
   all: unset;
-  color: #B00783;
+  color: #b00783;
   position: absolute;
   top: 8px;
   right: 8px;
@@ -301,4 +308,45 @@ button:hover {
 .copy-btn svg {
   display: block;
   pointer-events: none;
+}
+
+.panelTab-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding-top: 20px;
+}
+
+.panelTab {
+  border: 1px solid #7f055f;
+  border-radius: 16px;
+  border-width: 2px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.panelTab:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.panelTab-img {
+  margin-bottom: 0rem;
+}
+
+.panelTab h3 {
+  margin: 0 0 0.5rem;
+}
+
+.panelTab p {
+  margin: 0;
+}
+
+.maxWidth {
+  max-width: 800px;
+  margin: auto;
 }
