@@ -134,3 +134,60 @@ function paletteText(palette) {
   d3.select("#pythonCode").text(pythonCode);
 
 }
+
+
+
+
+function parseHexArrayStrict(input) {
+  const trimmed = input.trim();
+
+  // must be either JS array or R vector
+  const isJSArray = trimmed.startsWith('[') && trimmed.endsWith(']');
+  const isRVector = /^c\s*\(/i.test(trimmed) && trimmed.endsWith(')');
+
+  if (!isJSArray && !isRVector) {
+    return { valid: false, value: null };
+  }
+
+  // extract inside brackets
+  let inner = trimmed;
+
+  if (isRVector) {
+    inner = trimmed.replace(/^c\s*\(/i, '(').slice(1, -1); // inside (...)
+  } else {
+    inner = trimmed.slice(1, -1); // inside [...]
+  }
+
+  // split by commas NOT inside quotes
+  const parts = inner.split(',').map(s => s.trim());
+
+  if (parts.length === 0) {
+    return { valid: false, value: null };
+  }
+
+  const values = [];
+
+  for (const part of parts) {
+    // must be properly quoted
+    const match = part.match(/^['"](#?[0-9a-fA-F]{6})['"]$/);
+
+    if (!match) {
+      return { valid: false, value: null }; // 🚨 strict fail
+    }
+
+    const hex = match[1].toUpperCase();
+
+    if (!/^#[0-9A-F]{6}$/.test(hex)) {
+      return { valid: false, value: null };
+    }
+
+    values.push(hex);
+  }
+
+  return { valid: true, value: values };
+}
+
+
+function clampHex(el) {
+  el.value = el.value.slice(0, 7);
+}
