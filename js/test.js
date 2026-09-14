@@ -2,7 +2,7 @@ import { calcAPCA } from "https://cdn.jsdelivr.net/npm/apca-w3@0.1.9/+esm";
 
 let dynamicPalette = ['#A053A1', '#DB778F', '#E69F52', '#09A39A', '#5869C7', '#004B67'];
 
-function apcaPlot(palette, targetId = "#apca") {
+function apcaPlot(palette, plotID) {
   const n = palette.length;
 
   // Compute contrast matrix for the given palette
@@ -16,17 +16,26 @@ function apcaPlot(palette, targetId = "#apca") {
     }
   }
 
-  const svgWidth = 785;
+  const width = 785;
+  const padding = 10;
   const axisTitleSpace = 20;
   const gap = 6;
   const swatchSize = 24;
   const fontSize = 14;
 
-  // Clear any existing plot before redrawing
-  const container = d3.select(targetId);
-  container.selectAll("*").remove();
+  d3.select(plotID).html('');
 
-  const svg = container.append("svg").attr("width", svgWidth);
+  const chartContainer = d3.select(plotID)
+    .style('background-color', "#F0F5F5")
+    .style('padding', padding + 'px')
+    .style('width', width + padding * 2 + 'px');
+
+  const svg = chartContainer
+    .append('svg')
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', 'auto')
+    .append('g');
 
   // Measure the widest hex label so the margin is exactly as big as it needs to be
   const measure = svg
@@ -44,10 +53,11 @@ function apcaPlot(palette, targetId = "#apca") {
   const marginLeft = axisTitleSpace + maxLabelWidth + gap + swatchSize + gap;
   const marginTop = axisTitleSpace + fontSize + gap + swatchSize + gap;
 
-  const size = (svgWidth - marginLeft) / n;
-  const svgHeight = marginTop + n * size;
+  const size = (width - marginLeft) / n;
+  const height = marginTop + n * size;
 
-  svg.attr("height", svgHeight);
+  chartContainer.select('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`);
 
   // Axis titles, both horizontal, sitting in the top margin strip
   svg
