@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function recomputeAll() {
     if (!dynamicPalette) return;
 
-    palettePlot(dynamicPalette, "#plot");
     paletteText(dynamicPalette);
+    linePlot(dynamicPalette, "#line");
+    areaPlot(dynamicPalette, "#area");
+    scatterPlot(dynamicPalette, "#scatter");
+    barPlot(dynamicPalette, "#bar");
   }
 
   // Draw the plots immediately on load with the default palette

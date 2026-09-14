@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta property="og:title" content="Palette Generator" />
-    <meta property="og:description" content="Generate and explore colour palettes" />
-    <meta property="og:image" content="https://nrennie.rbind.io/palette-generator/app.png" />
+    <meta
+      property="og:description"
+      content="Generate and explore colour palettes"
+    />
+    <meta
+      property="og:image"
+      content="https://nrennie.rbind.io/palette-generator/app.png"
+    />
     <meta property="og:type" content="website" />
+    <link href="./img/favicon.ico" rel="icon" />
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
@@ -27,7 +34,7 @@
       <div class="container-fluid text-center">
         <h1 class="title"><a href="index.html">Palette Generator</a></h1>
         <h2 class="subtitle">Preview</h2>
-        <p>Preview how an existing palette appears.</p>
+        <p>Preview how an existing palette appears in different chart types.</p>
 
         <div class="navRow justify-content-center">
           <nav class="row">
@@ -77,19 +84,20 @@
       </div>
 
       <div class="row">
-        <div class="col-12">
-          <div class="resizeLeft">
-            <p class="freeText">Original palette:</p>
-          </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center text-center">
+          <div id="line"></div>
         </div>
-        <div class="col-12 d-flex justify-content-center text-center">
-          <div id="plot"></div>
+        <div class="col-12 col-md-6 d-flex justify-content-center text-center">
+          <div id="area"></div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-12 d-flex justify-content-center text-center">
-          <div id="apca"></div>
+        <div class="col-12 col-md-6 d-flex justify-content-center text-center">
+          <div id="scatter"></div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center text-center">
+          <div id="bar"></div>
         </div>
       </div>
 

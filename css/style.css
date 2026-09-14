@@ -350,3 +350,47 @@ button:hover {
   max-width: 800px;
   margin: auto;
 }
+
+details {
+  color: #151C28;
+  padding: 15px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #e4e9f1;
+  border-style: solid;
+  border-color: #f2f4f8;
+  border-width: 5px;
+  height: fit-content;
+  width: 100%;
+  max-width: 800px;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "▸";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details p {
+  margin: 0.75em 0 0;
+  line-height: 1.5;
+}

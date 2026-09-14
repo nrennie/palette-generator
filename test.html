@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta property="og:title" content="Palette Generator" />
-    <meta property="og:description" content="Generate and explore colour palettes" />
-    <meta property="og:image" content="https://nrennie.rbind.io/palette-generator/app.png" />
+    <meta
+      property="og:description"
+      content="Generate and explore colour palettes"
+    />
+    <meta
+      property="og:image"
+      content="https://nrennie.rbind.io/palette-generator/app.png"
+    />
     <meta property="og:type" content="website" />
+    <link href="./img/favicon.ico" rel="icon" />
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
@@ -18,7 +25,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/test.js" type="module" ></script>
+    <script src="js/test.js" type="module"></script>
 
     <title>Palette Generator</title>
   </head>
@@ -77,19 +84,24 @@
       </div>
 
       <div class="row">
-        <div class="col-12">
-          <div class="resizeLeft">
-            <p class="freeText">Original palette:</p>
-          </div>
-        </div>
-        <div class="col-12 d-flex justify-content-center text-center">
-          <div id="plot"></div>
+        <div class="col-12 d-flex justify-content-center">
+          <div id="apca"></div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-12 d-flex justify-content-center text-center">
-          <div id="apca"></div>
+        <div class="col-12 d-flex justify-content-center">
+          <details>
+            <summary>How to interpret APCA contrast values</summary>
+            <p>
+              APCA (Accessible Perceptual Contrast Algorithm) measures the
+              contrast between text and background colours, giving a score
+              roughly between -108 and 106 (the sign just shows which colour is
+              lighter). Higher absolute values mean better contrast: 60+ is good
+              for normal body text, 45+ works for larger text, and anything
+              below about 30 is too low to read comfortably.
+            </p>
+          </details>
         </div>
       </div>
 

@@ -16,67 +16,106 @@ function apcaPlot(palette, targetId = "#apca") {
     }
   }
 
-  const size = 80;
-  const marginLeft = 80;
-  const marginTop = 40;
-  const marginBottom = 20;
-  const svgWidth = size * (n + 1) + marginLeft;
-  const svgHeight = size * (n + 1) + marginTop + marginBottom;
+  const svgWidth = 785;
+  const axisTitleSpace = 20;
+  const gap = 6;
+  const swatchSize = 24;
+  const fontSize = 14;
 
   // Clear any existing plot before redrawing
   const container = d3.select(targetId);
   container.selectAll("*").remove();
 
-  const svg = container
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+  const svg = container.append("svg").attr("width", svgWidth);
 
-  // X-axis label on top, centered
+  // Measure the widest hex label so the margin is exactly as big as it needs to be
+  const measure = svg
+    .append("text")
+    .attr("font-size", fontSize)
+    .style("visibility", "hidden");
+
+  let maxLabelWidth = 0;
+  palette.forEach((col) => {
+    measure.text(col);
+    maxLabelWidth = Math.max(maxLabelWidth, measure.node().getBBox().width);
+  });
+  measure.remove();
+
+  const marginLeft = axisTitleSpace + maxLabelWidth + gap + swatchSize + gap;
+  const marginTop = axisTitleSpace + fontSize + gap + swatchSize + gap;
+
+  const size = (svgWidth - marginLeft) / n;
+  const svgHeight = marginTop + n * size;
+
+  svg.attr("height", svgHeight);
+
+  // Axis titles, both horizontal, sitting in the top margin strip
   svg
     .append("text")
-    .attr("x", marginLeft + ((n + 1) * size) / 2)
-    .attr("y", marginTop / 2)
-    .attr("text-anchor", "middle")
+    .attr("x", marginLeft - gap)
+    .attr("y", axisTitleSpace + 70)
+    .attr("text-anchor", "end")
+    .attr("font-size", fontSize)
+    .attr("font-weight", "bold")
+    .text("Text Colour");
+
+  svg
+    .append("text")
+    .attr("x", marginLeft)
+    .attr("y", axisTitleSpace / 2)
+    .attr("text-anchor", "start")
+    .attr("font-size", fontSize)
     .attr("font-weight", "bold")
     .text("Background Colour");
 
-  // Column headers
+  // Column headers: label above swatch, swatch directly above the grid
   palette.forEach((col, i) => {
+    const cx = marginLeft + (i + 0.5) * size;
+    const swatchY = marginTop - swatchSize - gap;
+
     svg
       .append("rect")
-      .attr("x", marginLeft + (i + 1) * size)
-      .attr("y", marginTop)
-      .attr("width", size)
-      .attr("height", size)
-      .attr("fill", col)
-      .attr("stroke", "#ccc");
+      .attr("class", "apca-swatch")
+      .attr("x", cx - swatchSize / 2)
+      .attr("y", swatchY)
+      .attr("width", swatchSize)
+      .attr("height", swatchSize)
+      .attr("rx", 5)
+      .attr("ry", 5)
+      .attr("fill", col);
 
     svg
       .append("text")
-      .attr("x", marginLeft + (i + 1.5) * size)
-      .attr("y", marginTop + size / 2 + 5)
+      .attr("x", cx)
+      .attr("y", swatchY - gap)
       .attr("text-anchor", "middle")
+      .attr("font-size", fontSize)
       .attr("fill", "black")
       .text(col);
   });
 
-  // Row headers
+  // Row headers: swatch directly left of the grid, label directly left of the swatch
   palette.forEach((col, i) => {
+    const cy = marginTop + (i + 0.5) * size;
+    const swatchX = marginLeft - swatchSize - gap;
+
     svg
       .append("rect")
-      .attr("x", marginLeft)
-      .attr("y", marginTop + (i + 1) * size)
-      .attr("width", size)
-      .attr("height", size)
-      .attr("fill", col)
-      .attr("stroke", "#ccc");
+      .attr("class", "apca-swatch")
+      .attr("x", swatchX)
+      .attr("y", cy - swatchSize / 2)
+      .attr("width", swatchSize)
+      .attr("height", swatchSize)
+      .attr("rx", 5)
+      .attr("ry", 5)
+      .attr("fill", col);
 
     svg
       .append("text")
-      .attr("x", marginLeft + size / 2)
-      .attr("y", marginTop + (i + 1.5) * size)
-      .attr("text-anchor", "middle")
+      .attr("x", swatchX - gap)
+      .attr("y", cy + fontSize / 3)
+      .attr("text-anchor", "end")
+      .attr("font-size", fontSize)
       .attr("fill", "black")
       .text(col);
   });
@@ -86,8 +125,8 @@ function apcaPlot(palette, targetId = "#apca") {
     for (let j = 0; j < n; j++) {
       svg
         .append("rect")
-        .attr("x", marginLeft + (j + 1) * size)
-        .attr("y", marginTop + (i + 1) * size)
+        .attr("x", marginLeft + j * size)
+        .attr("y", marginTop + i * size)
         .attr("width", size)
         .attr("height", size)
         .attr("fill", "white")
@@ -95,26 +134,13 @@ function apcaPlot(palette, targetId = "#apca") {
 
       svg
         .append("text")
-        .attr("x", marginLeft + (j + 1.5) * size)
-        .attr("y", marginTop + (i + 1.5) * size)
+        .attr("x", marginLeft + (j + 0.5) * size)
+        .attr("y", marginTop + (i + 0.5) * size)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
         .text(contrast_mat[i][j].toFixed(2));
     }
   }
-
-  // Y-axis label
-  svg
-    .append("text")
-    .attr("x", marginLeft / 2)
-    .attr("y", marginTop + ((n + 1) * size) / 2)
-    .attr("text-anchor", "middle")
-    .attr("font-weight", "bold")
-    .attr(
-      "transform",
-      `rotate(-90, ${marginLeft / 2}, ${marginTop + ((n + 1) * size) / 2})`
-    )
-    .text("Text Colour");
 
   return svg;
 }
